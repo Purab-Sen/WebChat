@@ -22,8 +22,8 @@ const Contact = ({ user,index }) => {
   const [imageUrl,setImageUrl] = useState(placeHolderImage);
   const { account, setPerson } = useContext(AccountContext);
   const setOtherUser = async () => {
-    setPerson(user);
     await setConversation({ senderId: account.sub, receiverId: user.sub });
+    setPerson(user);
   };
   useEffect(()=>{
     const x = setTimeout(()=>{
