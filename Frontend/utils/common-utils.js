@@ -7,7 +7,10 @@ export const formatDate = (date)=>{
 export const downloadMedia = async (e,url) => {
     e.preventDefault();
     try{
-        const response = await fetch(url);
+        const response = await fetch(url,{
+            method:"GET",
+            credentials:"include"
+        });
         const blob = await response.blob();
         const newurl = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
