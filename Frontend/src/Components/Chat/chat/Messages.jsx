@@ -31,6 +31,7 @@ const Messages = ({ person, conversation }) => {
 
   useEffect(() => {
     const getMessagesDetails = async () => {
+      setMessages([]);
       let {data,status} = await getMessages(conversation._id);
       if(status === 401){
         setAccount(null);
