@@ -40,7 +40,7 @@ const Messages = ({ person, conversation }) => {
     };
     conversation._id && getMessagesDetails();
     setValue("");
-  }, [person.sub, conversation._id,newMessageFlag]); //here conversation._id is required because it can occur that initally on opening chat, conversation._id may not have been received, but after sometime it may come which will lead to reload of component with the received messages.
+  }, [conversation._id,newMessageFlag]); //here conversation._id is required because it can occur that initally on opening chat, conversation._id may not have been received, but after sometime it may come which will lead to reload of component with the received messages.
   
 
   //Note: The role of use effect here is only to make sure that socket.current.on event shouldn't interfere with react components. It is side effect. Socket is self able to detect the event of receive message i.e getMessage.
