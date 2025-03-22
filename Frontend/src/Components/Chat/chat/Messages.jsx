@@ -88,6 +88,7 @@ const Messages = ({ person, conversation }) => {
       socket.current.emit('sendMessage',message);
       await newMessage(message);
       setValue("");
+      setFile(null);
       setNewMessageFlag(prev=>!prev);
     }
   };
