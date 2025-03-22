@@ -101,7 +101,15 @@ const Messages = ({
     <Wrapper>
       <Component>
         {conversationLoading ? (
-          <LinearProgress />
+          <LinearProgress 
+            sx={{
+              marginTop:"-10px",
+              backgroundColor: "#fff",
+              "& .MuiLinearProgress-bar": {
+                backgroundColor: "#00bfa5",
+              },
+            }}
+          />
         ) : (
           messages.map((message, index) => (
             <Container ref={index == messages.length - 1 ? scrollRef : null}>
