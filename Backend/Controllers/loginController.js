@@ -28,7 +28,9 @@ const handleUserLogin = async(req,res,sub)=>{
     const exist = await User.findOne({sub:sub});
     res.cookie("auth-token",generateToken(sub),{
         maxAge:365*24*60*60*1000,
-        httpOnly:true
+        httpOnly:true,
+        secure:true,
+        sameSite:"None"
     });
     if(exist){
         return res.status(200).json({data:exist,message:"user already exists"});
