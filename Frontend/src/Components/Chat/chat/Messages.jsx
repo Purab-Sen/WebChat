@@ -1,4 +1,4 @@
-import { Box, styled } from "@mui/material";
+import { Box, styled,LinearProgress } from "@mui/material";
 import Footer from "./Footer";
 import { useContext, useEffect, useRef, useState } from "react";
 import { AccountContext } from "../../../Context/AccountProvider";
@@ -19,7 +19,7 @@ const Container = styled(Box)`
     padding:2px 60px;
 `
 
-const Messages = ({ person, conversation }) => {
+const Messages = ({ person, conversation,conversationLoading, setConversationLoading }) => {
   const { account,socket,setAccount } = useContext(AccountContext);
   const [value, setValue] = useState("");
   const [messages, setMessages] = useState([]);
@@ -31,12 +31,12 @@ const Messages = ({ person, conversation }) => {
 
   useEffect(() => {
     const getMessagesDetails = async () => {
-      setMessages([]);
       let {data,status} = await getMessages(conversation._id);
       if(status === 401){
         setAccount(null);
       }
       setMessages(data);
+      setConversationLoading(false);
     };
     conversation._id && getMessagesDetails();
     setValue("");
@@ -95,13 +95,14 @@ const Messages = ({ person, conversation }) => {
   };
   return (
     <Wrapper>
-      <Component>
+      {conversationLoading?<LinearProgress/>:
+      (<Component>
         {messages.map((message,index) => (
           <Container ref={index == messages.length-1?scrollRef:null}>
             <Message key={`message${index}`} message={message} />
           </Container>
         ))}
-      </Component>
+      </Component>)}
       <Footer sendText={sendText} value={value} setValue={setValue} file={file} setFile={setFile} setImage={setImage} />
     </Wrapper>
   );

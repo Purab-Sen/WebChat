@@ -7,8 +7,10 @@ import getConversation from "../../../../apis/getConversation.js";
 const ChatBox = () => {
   const {person,account,setAccount} = useContext(AccountContext);
   const [conversation,setConversation] = useState({});
+  const [conversationLoading,setConversationLoading] = useState(false);
   useEffect(()=>{
     const getConversationDetails  = async () =>{
+      setConversationLoading(true);
       let {data,status} = await getConversation({senderId:account.sub,receiverId:person.sub});
       if(status === 401){
         setAccount(null);
@@ -22,7 +24,7 @@ const ChatBox = () => {
   return (
     <>
       <ChatHeader person={person} account={account}/>
-      {Object.keys(conversation).length > 0 && <Messages person={person} conversation={conversation}/>}
+      {Object.keys(conversation).length > 0 && <Messages person={person} conversation={conversation} conversationLoading={conversationLoading} setConversationLoading={setConversationLoading}/>}
     </>
   );
 };
