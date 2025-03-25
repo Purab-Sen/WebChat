@@ -28,7 +28,7 @@ const Contact = ({ user,index }) => {
   useEffect(()=>{
     const x = setTimeout(()=>{
       setImageUrl(user.picture);
-    },index*300);
+    },index*100);
     return ()=>clearInterval(x);
   },[user.sub])
   return (
