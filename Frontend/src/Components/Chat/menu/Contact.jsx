@@ -30,7 +30,7 @@ const Contact = ({ user,index }) => {
       setImageUrl(user.picture);
     },index*300);
     return ()=>clearInterval(x);
-  },[])
+  },[user.sub])
   return (
     <Component onClick={() => setOtherUser()}>
       <Box>
