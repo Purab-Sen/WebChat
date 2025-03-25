@@ -48,9 +48,8 @@ const Conversations = ({text})=>{
               }}
             />:
                 users.map((user,index)=>{
-                    let key = `contact${index}`
                     return (<>
-                        <Contact key={key} user={user} index={index}/>
+                        <Contact user={user} index={index}/>
                         <StyledDivider/>
                     </>)
                 })
